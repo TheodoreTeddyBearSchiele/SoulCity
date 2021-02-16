@@ -1,2 +1,2 @@
-# legacy
+# SoulCity
 Marketing and Management 

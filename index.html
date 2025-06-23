@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Process Mapper</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+#map {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 32px;
+}
+.step-box {
+    background-color: #FFFFFF;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-size: 15px;
+    color: #333;
+}
+.arrow {
+    font-size: 20px;
+    color: #0B3D2E;
+}
+</style>
+</head>
+<body>
+<div style="background-color:#FFFFFF; padding:40px; border-radius:12px; box-shadow:0 0 40px rgba(11,61,46,0.15); max-width:800px; margin:auto;">
+  <h2 style="text-align:center; color:#0B3D2E; font-size:28px; font-weight:bold;">Map Your Path Forward</h2>
+  <p style="text-align:center; color:#555; font-size:16px;">Enter up to 10 next steps you’re ready to take in life or business.</p>
+  <form id="growthStepsForm">
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <input type="text" name="step1" placeholder="Step 1" style="padding:12px; border:1px solid #ccc; border-radius:6px; font-size:15px;" />
+      <input type="text" name="step2" placeholder="Step 2" style="padding:12px; border:1px solid #ccc; border-radius:6px; font-size:15px;" />
+      <input type="text" name="step3" placeholder="Step 3" style="padding:12px; border:1px solid #ccc; border-radius:6px; font-size:15px;" />
+      <input type="text" name="step4" placeholder="Step 4" style="padding:12px; border:1px solid #ccc; border-radius:6px; font-size:15px;" />
+      <input type="text" name="step5" placeholder="Step 5" style="padding:12px; border:1px solid #ccc; border-radius:6px; font-size:15px;" />
+      <input type="text" name="step6" placeholder="Step 6" style="padding:12px; border:1px solid #ccc; border-radius:6px; font-size:15px;" />
+      <input type="text" name="step7" placeholder="Step 7" style="padding:12px; border:1px solid #ccc; border-radius:6px; font-size:15px;" />
+      <input type="text" name="step8" placeholder="Step 8" style="padding:12px; border:1px solid #ccc; border-radius:6px; font-size:15px;" />
+      <input type="text" name="step9" placeholder="Step 9" style="padding:12px; border:1px solid #ccc; border-radius:6px; font-size:15px;" />
+      <input type="text" name="step10" placeholder="Step 10" style="padding:12px; border:1px solid #ccc; border-radius:6px; font-size:15px;" />
+    </div>
+    <button type="submit" style="margin-top:24px; background-color:#FC4928; color:#fff; padding:12px 20px; border:none; border-radius:8px; font-size:16px; cursor:pointer; transition:all 0.3s ease;">Generate My Path</button>
+  </form>
+  <div id="output" style="margin-top:32px; display:none;">
+    <h3 style="color:#0B3D2E;">Your Customized Process Map</h3>
+    <div id="map"></div>
+  </div>
+</div>
+<script>
+document.getElementById('growthStepsForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const mapContainer = document.getElementById('map');
+    mapContainer.innerHTML = '';
+    const steps = [];
+    for (let i = 1; i <= 10; i++) {
+        const value = formData.get('step' + i);
+        if (value && value.trim() !== '') {
+            steps.push(value.trim());
+        }
+    }
+    steps.forEach((step, index) => {
+        const box = document.createElement('div');
+        box.className = 'step-box';
+        box.textContent = step;
+        mapContainer.appendChild(box);
+        if (index < steps.length - 1) {
+            const arrow = document.createElement('div');
+            arrow.className = 'arrow';
+            arrow.textContent = '→';
+            mapContainer.appendChild(arrow);
+        }
+    });
+    document.getElementById('output').style.display = 'block';
+});
+</script>
+</body>
+</html>
